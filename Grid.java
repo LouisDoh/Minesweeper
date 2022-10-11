@@ -56,11 +56,11 @@ public class Grid {
     }
 
     public String toString() {
-        String returnString = "*";
+        String returnString = "+";
         for(int i=0; i<this.gridSize; i++) {
             returnString += "-";
         }
-        returnString += "*\n";
+        returnString += "+\n";
 
         for(Tile[] row : this.tileGrid) {
             returnString += "|";
@@ -69,7 +69,7 @@ public class Grid {
                     if(tile.isBomb()) {
                         returnString += "B";
                     } else if(tile.getNearBombs() == 0) {
-                        returnString += "-";
+                        returnString += ".";
                     } else {
                         returnString += tile.getNearBombs();
                     }
@@ -83,11 +83,11 @@ public class Grid {
             }
             returnString += "|\n";
         }
-        returnString += "*";
+        returnString += "+";
         for(int i=0; i<this.gridSize; i++) {
             returnString += "-";
         }
-        returnString += "*";
+        returnString += "+";
 
         return returnString;
     }
