@@ -39,10 +39,14 @@ public class Grid {
         for(int row=tileRow-1;row<tileRow+1;row++) {
             for(int col=tileCol-1;col<tileCol+1;col++) {
                 if ((row>0 && row<gridSize) && (col>0 && col<gridSize)) {
-                    if this.tileGrid()
+                    if(this.tileGrid[row][col].isBomb()) {
+                        nearbyBombs += 1;
+                    }
                 }
             }
         }
+
+        return nearbyBombs;
     }
 
     public String toString() {
