@@ -41,9 +41,9 @@ public class Grid {
         int nearbyBombs = 0;
 
         for(int row=tileRow-1; row<=tileRow+1; row++) {
-            for(int col=tileCol-1; col<=tileCol+1; col++) {
-                if( (row>=0 && row<this.gridSize) && (col>=0 && col<this.gridSize)) {
-                    if(row!=tileRow || col!=tileCol) {
+            if(row>=0 && row<this.gridSize) {
+                for(int col=tileCol-1; col<=tileCol+1; col++) {
+                    if(col>=0 && col<this.gridSize) {
                         if(this.tileGrid[row][col].isBomb()) {
                             nearbyBombs++;
                         }
