@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Grid {
 
-    private Tile[][] tileGrid;
+    public Tile[][] tileGrid; //Remember to make this priv again
     private int gridSize;
     private int numberOfBombs;
 
@@ -28,7 +28,39 @@ public class Grid {
             }
             this.tileGrid[row][col].setBomb(true);
         }
+        updateNearbyBombs();
+    }
 
+    public void makeMove(int moveRow, int moveCol) {
+        this.tileGrid[moveRow][moveCol].setRevealed(true);
+        if(this.tileGrid[moveRow][moveCol].getNearBombs() == 0) {
+            revealZeroes(moveRow,moveCol);
+        }
+
+        if(this.tileGrid[moveRow][moveCol].isBomb()) {
+            System.out.println("You clicked on a bomb - loser!");
+        }
+    }
+
+    private void revealZeroes(int zeroRow, int zeroCol) {
+        this.tileGrid[zeroRow][zeroCol].setRevealed(true);
+        for(int row=zeroRow-1; row<=zeroRow+1; row++) {
+            if(row>=0 && row<this.gridSize) {
+                for(int col=zeroCol-1; col<=zeroCol+1; col++) {
+                    if(col>=0 && col<this.gridSize) {
+                        if(!this.tileGrid[row][col].isRevealed() &&
+                                this.tileGrid[row][col].getNearBombs() == 0) {
+                            revealZeroes(row,col);
+                        } else {
+                            this.tileGrid[row][col].setRevealed(true);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void updateNearbyBombs() {
         for(int row=0; row<gridSize; row++) {
             for(int col=0; col<gridSize; col++) {
                 int nearBombs = this.surroundingBombs(row,col);
@@ -37,7 +69,7 @@ public class Grid {
         }
     }
 
-    private int surroundingBombs(int tileRow,int tileCol) {
+    private int surroundingBombs(int tileRow, int tileCol) {
         int nearbyBombs = 0;
 
         for(int row=tileRow-1; row<=tileRow+1; row++) {
@@ -65,7 +97,7 @@ public class Grid {
         for(Tile[] row : this.tileGrid) {
             returnString += "|";
             for(Tile tile : row) {
-                if(!tile.isRevealed()) {
+                if(tile.isRevealed()) {
                     if(tile.isBomb()) {
                         returnString += "B";
                     } else if(tile.getNearBombs() == 0) {
