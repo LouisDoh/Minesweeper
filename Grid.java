@@ -42,6 +42,11 @@ public class Grid {
         }
     }
 
+    public void changeTileFlagged(int flagRow, int flagCol) {
+        boolean inverted = !this.tileGrid[flagRow][flagCol].isFlagged();
+        this.tileGrid[flagRow][flagCol].setFlagged(inverted);
+    }
+
     private void revealZeroes(int zeroRow, int zeroCol) {
         this.tileGrid[zeroRow][zeroCol].setRevealed(true);
         for(int row=zeroRow-1; row<=zeroRow+1; row++) {
