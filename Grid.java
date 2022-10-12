@@ -56,17 +56,23 @@ public class Grid {
 
     private void revealZeroes(int zeroRow, int zeroCol) {
         this.tileGrid[zeroRow][zeroCol].setRevealed(true);
+        Tile currentTile;
         for(int row=zeroRow-1; row<=zeroRow+1; row++) {
             if(row>=0 && row<this.gridSize) {
                 for(int col=zeroCol-1; col<=zeroCol+1; col++) {
                     if(col>=0 && col<this.gridSize) {
-                        if(!this.tileGrid[row][col].isRevealed() &&
-                                this.tileGrid[row][col].getNearBombs() == 0) {
-                            revealZeroes(row,col);
-                        } else {
-                            if(!this.tileGrid[row][col].isBomb())
-                                this.tileGrid[row][col].setRevealed(true);
+
+                        currentTile = this.tileGrid[row][col];
+                        if(!currentTile.isFlagged()) {
+                            if(!currentTile.isRevealed() &&
+                                    currentTile.getNearBombs() == 0) {
+                                revealZeroes(row,col);
+                            } else {
+                                if(!currentTile.isBomb())
+                                    currentTile.setRevealed(true);
+                            }
                         }
+
                     }
                 }
             }
@@ -109,7 +115,6 @@ public class Grid {
                 currentTile = this.tileGrid[row][col];
                 if(!currentTile.isBomb() && !currentTile.isRevealed()) {
                     //if there is at least one un-revealed non-bomb, the game has not been won
-                    //System.out.println("Unrevealed non-bomb at row: "+row+", col: "+col);
                     return false;
                 }
             }

@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Grid gameGrid = new Grid(12,10);
+        Grid gameGrid = new Grid(10,10);
 
         launchGame(gameGrid,in);
     }
