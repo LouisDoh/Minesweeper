@@ -14,9 +14,17 @@ public class Main {
         boolean playAgain = true;
         boolean gameOngoing;
         boolean win;
+        int gridSize;
+        int noOfBombs;
 
         while(playAgain) {
-            gameGrid = new Grid(4,4);
+            System.out.println("How big would you like your grid?");
+            gridSize = in.nextInt();
+            System.out.println("And how many bombs do you want?");
+            noOfBombs = in.nextInt();
+            in.nextLine(); //clean input stream
+
+            gameGrid = new Grid(noOfBombs,gridSize);
             gameOngoing = true;
             win = false;
             System.out.println(gameGrid);
