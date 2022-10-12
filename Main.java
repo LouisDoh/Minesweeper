@@ -21,16 +21,23 @@ public class Main {
     }
 
     public static boolean playerMove(Grid gameGrid, Scanner input) {
-        System.out.println("Please enter your move as co-ords x,y:");
+        System.out.println("Please enter your move as co-ords x,y,f/t (f means flag/unflag this tile, t means click it):");
         int row;
         int col;
+        String flag;
         String[] coOrds = input.nextLine().split(",");
 
         col = Integer.parseInt(coOrds[0])-1;
         row = Integer.parseInt(coOrds[1])-1;
+        flag = coOrds[2];
 
-        if(gameGrid.makeMove(row,col)) {
+        if(flag.equals("f")) {
+            gameGrid.changeTileFlagged(row,col);
             return true;
+        } else {
+            if (gameGrid.makeMove(row, col)) {
+                return true;
+            }
         }
 
         return false;

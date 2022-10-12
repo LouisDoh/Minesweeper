@@ -48,6 +48,7 @@ public class Grid {
     public void changeTileFlagged(int flagRow, int flagCol) {
         boolean inverted = !this.tileGrid[flagRow][flagCol].isFlagged();
         this.tileGrid[flagRow][flagCol].setFlagged(inverted);
+        System.out.println(this);
     }
 
     private void revealZeroes(int zeroRow, int zeroCol) {
