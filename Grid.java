@@ -31,15 +31,18 @@ public class Grid {
         updateNearbyBombs();
     }
 
-    public void makeMove(int moveRow, int moveCol) {
+    public boolean makeMove(int moveRow, int moveCol) {
         this.tileGrid[moveRow][moveCol].setRevealed(true);
         if(this.tileGrid[moveRow][moveCol].getNearBombs() == 0) {
             revealZeroes(moveRow,moveCol);
         }
 
         if(this.tileGrid[moveRow][moveCol].isBomb()) {
-            System.out.println("You clicked on a bomb - loser!");
+            return false;
         }
+
+        System.out.println(this);
+        return true;
     }
 
     public void changeTileFlagged(int flagRow, int flagCol) {
