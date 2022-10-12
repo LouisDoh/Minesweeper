@@ -2,35 +2,50 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        Grid gameGrid = new Grid(10,10);
+        /*Scanner in = new Scanner(System.in);
+        Grid gameGrid = new Grid(4,4);*/
 
-        launchGame(gameGrid,in);
+        launchGame();
     }
 
-    public static void launchGame(Grid gameGrid, Scanner input) {
-        boolean gameOngoing = true;
-        boolean win = false;
-        System.out.println(gameGrid);
+    public static void launchGame() {
+        Scanner in = new Scanner(System.in);
+        Grid gameGrid;
+        boolean playAgain = true;
+        boolean gameOngoing;
+        boolean win;
 
-        while(gameOngoing) {
-            if(playerMove(gameGrid,input)) {
-                gameGrid.checkWin();
-                if(gameGrid.gameWon) {
-                    win = true;
+        while(playAgain) {
+            gameGrid = new Grid(4,4);
+            gameOngoing = true;
+            win = false;
+            System.out.println(gameGrid);
+
+            while(gameOngoing) {
+                if(playerMove(gameGrid,in)) {
+                    gameGrid.checkWin();
+                    if(gameGrid.gameWon) {
+                        win = true;
+                        gameOngoing = false;
+                    }
+                } else {
+                    win = false;
                     gameOngoing = false;
                 }
-            } else {
-                win = false;
-                gameOngoing = false;
             }
+
+            if(win) {
+                System.out.println("Congrats! You won!");
+            } else {
+                System.out.println("You clicked on a bomb and lost! Loser!");
+            }
+            System.out.println("Would you like to play again (y/n)?");
+            if(in.next().equals("n")) {
+                playAgain = false;
+            }
+            in.nextLine(); //clean the input stream
         }
 
-        if(win) {
-            System.out.println("Congrats! You won!");
-        } else {
-            System.out.println("You clicked on a bomb and lost! Loser!");
-        }
 
     }
 
