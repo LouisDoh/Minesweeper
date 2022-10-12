@@ -3,21 +3,38 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Grid gameGrid = new Grid(10,10);
-        System.out.println(gameGrid);
+        Grid gameGrid = new Grid(0,2);
+        gameGrid.tileGrid[1][1].setBomb(true);
+        gameGrid.updateNearbyBombs();
+
         launchGame(gameGrid,in);
     }
 
     public static void launchGame(Grid gameGrid, Scanner input) {
         boolean gameOngoing = true;
+        boolean win = false;
+        System.out.println(gameGrid);
 
         while(gameOngoing) {
-            if(!playerMove(gameGrid,input)) {
+            if(playerMove(gameGrid,input)) {
+                gameGrid.checkWin();
+                if(gameGrid.gameWon) {
+                    win = true;
+                    gameOngoing = false;
+                }
+            } else {
+                win = false;
                 gameOngoing = false;
             }
+            System.out.println(gameGrid);
         }
-        System.out.println(gameGrid);
-        System.out.println("You clicked a bomb! Loser!");
+
+        if(win) {
+            System.out.println("Congrats! You won!");
+        } else {
+            System.out.println("You clicked on a bomb and lost! Loser!");
+        }
+
     }
 
     public static boolean playerMove(Grid gameGrid, Scanner input) {

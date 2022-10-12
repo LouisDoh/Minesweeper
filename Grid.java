@@ -5,6 +5,7 @@ public class Grid {
     public Tile[][] tileGrid; //Remember to make this priv again
     private int gridSize;
     private int numberOfBombs;
+    public boolean gameWon = false;
 
     public Grid(int numberOfBombs, int gridSize) {
         this.tileGrid = new Tile[gridSize][gridSize];
@@ -33,14 +34,16 @@ public class Grid {
 
     public boolean makeMove(int moveRow, int moveCol) {
         this.tileGrid[moveRow][moveCol].setRevealed(true);
-        if(this.tileGrid[moveRow][moveCol].getNearBombs() == 0) {
-            revealZeroes(moveRow,moveCol);
-        }
 
         if(this.tileGrid[moveRow][moveCol].isBomb()) {
             return false;
         }
 
+        if(this.tileGrid[moveRow][moveCol].getNearBombs() == 0) {
+            revealZeroes(moveRow,moveCol);
+        }
+
+        this.gameWon = checkWin();
         System.out.println(this);
         return true;
     }
@@ -61,7 +64,8 @@ public class Grid {
                                 this.tileGrid[row][col].getNearBombs() == 0) {
                             revealZeroes(row,col);
                         } else {
-                            this.tileGrid[row][col].setRevealed(true);
+                            if(!this.tileGrid[row][col].isBomb())
+                                this.tileGrid[row][col].setRevealed(true);
                         }
                     }
                 }
@@ -94,6 +98,24 @@ public class Grid {
         }
 
         return nearbyBombs;
+    }
+
+    public boolean checkWin() {
+        Tile currentTile;
+
+        for(int row=0; row<this.gridSize; row++) {
+            for(int col=0; col<this.gridSize; col++) {
+                //for each tile in our grid
+                currentTile = this.tileGrid[row][col];
+                if(!currentTile.isBomb() && !currentTile.isRevealed()) {
+                    //if there is at least one un-revealed non-bomb, the game has not been won
+                    //System.out.println("Unrevealed non-bomb at row: "+row+", col: "+col);
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     public String toString() {
