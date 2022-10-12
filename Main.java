@@ -3,9 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Grid gameGrid = new Grid(0,2);
-        gameGrid.tileGrid[1][1].setBomb(true);
-        gameGrid.updateNearbyBombs();
+        Grid gameGrid = new Grid(12,10);
 
         launchGame(gameGrid,in);
     }
@@ -26,7 +24,6 @@ public class Main {
                 win = false;
                 gameOngoing = false;
             }
-            System.out.println(gameGrid);
         }
 
         if(win) {
