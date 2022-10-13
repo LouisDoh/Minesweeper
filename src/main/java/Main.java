@@ -81,25 +81,42 @@ public class Main {
     }
 
     public static boolean playerMove(Grid gameGrid, Scanner input) {
-        System.out.println("Please enter your move as co-ords x,y,f/t (f means flag/unflag this tile, t means click it):");
         int row;
         int col;
         String flag;
-        String[] coOrds = input.nextLine().split(",");
 
-        col = Integer.parseInt(coOrds[0])-1;
-        row = Integer.parseInt(coOrds[1])-1;
-        flag = coOrds[2];
+        while(true) { //return statements will exit out of method where needed
+            System.out.println("Please enter your move as co-ords x,y,f/t (f means flag/unflag this tile, t means click it):");
+            String[] coOrds = input.nextLine().split(",");
+            if (coOrds.length == 3) {
+                try {
+                    col = Integer.parseInt(coOrds[0])-1;
+                    row = Integer.parseInt(coOrds[1])-1;
+                    flag = coOrds[2];
 
-        if(flag.equals("f")) {
-            gameGrid.changeTileFlagged(row,col);
-            return true;
-        } else {
-            if (gameGrid.makeMove(row, col)) {
-                return true;
+                    if(flag.equals("f")) {
+                        gameGrid.changeTileFlagged(row,col);
+                        return true;
+                    } else if(flag.equals("t")){
+
+                        if (gameGrid.makeMove(row, col)) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+
+                    } else {
+                        System.out.println("You need to give either an 'f' or a 't' as your third input.");
+                    }
+
+                } catch(NumberFormatException e) {
+                    System.out.println("Wrong inputs!");
+                }
+
+            } else {
+                System.out.println("Wrong number of inputs!");
             }
-        }
 
-        return false;
+        }
     }
 }
