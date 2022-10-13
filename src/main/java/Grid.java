@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Grid {
 
-    public Tile[][] tileGrid; //Remember to make this priv again
+    private Tile[][] tileGrid; //Remember to make this priv again
     private int gridSize;
     public boolean gameWon = false;
 
@@ -32,15 +32,20 @@ public class Grid {
     }
 
     public boolean makeMove(int moveRow, int moveCol) {
-        this.tileGrid[moveRow][moveCol].setRevealed(true);
+        if(!this.tileGrid[moveRow][moveCol].isFlagged()) {
+            this.tileGrid[moveRow][moveCol].setRevealed(true);
 
-        if(this.tileGrid[moveRow][moveCol].isBomb()) {
-            return false;
+            if(this.tileGrid[moveRow][moveCol].isBomb()) {
+                return false;
+            }
+
+            if(this.tileGrid[moveRow][moveCol].getNearBombs() == 0) {
+                revealZeroes(moveRow,moveCol);
+            }
+        } else {
+            System.out.println("You selected a tile you've flagged; no move has been made.");
         }
 
-        if(this.tileGrid[moveRow][moveCol].getNearBombs() == 0) {
-            revealZeroes(moveRow,moveCol);
-        }
 
         this.gameWon = checkWin();
         System.out.println(this);
