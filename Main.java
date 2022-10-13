@@ -23,7 +23,7 @@ public class Main {
             System.out.println("How big would you like your grid?");
             while(!in.hasNextInt()) {
                 System.out.println("Please only input a single number. How big would you like your grid?");
-                in.next();
+                in.next(); //swallow garbage input
             }
             gridSize = in.nextInt();
 
