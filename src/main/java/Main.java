@@ -46,7 +46,6 @@ public class Main {
                         gameOngoing = false;
                     }
                 } else {
-                    win = false;
                     gameOngoing = false;
                 }
             }
@@ -86,6 +85,7 @@ public class Main {
             System.out.println("Please enter your move as co-ords x,y,f/t (f means flag/unflag this tile, t means click it):");
             String[] coOrds = input.nextLine().split(",");
             if (coOrds.length == 3) {
+
                 try {
                     col = Integer.parseInt(coOrds[0])-1;
                     row = Integer.parseInt(coOrds[1])-1;
@@ -95,13 +95,7 @@ public class Main {
                         gameGrid.changeTileFlagged(row,col);
                         return true;
                     } else if(flag.equals("t")){
-
-                        if (gameGrid.makeMove(row, col)) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-
+                        return gameGrid.makeMove(row, col);
                     } else {
                         System.out.println("You need to give either an 'f' or a 't' as your third input.");
                     }
