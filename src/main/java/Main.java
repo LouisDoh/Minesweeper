@@ -100,8 +100,8 @@ public class Main {
                         System.out.println("You need to give either an 'f' or a 't' as your third input.");
                     }
 
-                } catch(NumberFormatException e) {
-                    System.out.println("Wrong inputs!");
+                } catch(NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Wrong inputs! Double check your co-ordinates are integers and make sure they're in-bounds.");
                 }
 
             } else {
