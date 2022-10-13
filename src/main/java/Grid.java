@@ -4,7 +4,6 @@ public class Grid {
 
     public Tile[][] tileGrid; //Remember to make this priv again
     private int gridSize;
-    private int numberOfBombs;
     public boolean gameWon = false;
 
     public Grid(int numberOfBombs, int gridSize) {
