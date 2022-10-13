@@ -18,7 +18,7 @@
         <sonar.issue.ignore.multicriteria>e1</sonar.issue.ignore.multicriteria>
         <sonar.issue.ignore.multicriteria.e1.ruleKey>java:S106</sonar.issue.ignore.multicriteria.e1.ruleKey>
         <sonar.issue.ignore.multicriteria.e1.resourceKey>
-            **src/main/Main.java
+            **/src/main/java/Main.java
         </sonar.issue.ignore.multicriteria.e1.resourceKey>
     </properties>
 
