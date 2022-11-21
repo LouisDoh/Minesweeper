@@ -1,14 +1,18 @@
+package oop.blueprints;
+
 import java.util.Random;
 
 public class Grid {
 
-    private Tile[][] tileGrid; //Remember to make this priv again
+    public Tile[][] tileGrid; //Remember to make this priv again
     private int gridSize;
     public boolean gameWon = false;
+    private int noOfBombs;
 
     public Grid(int numberOfBombs, int gridSize) {
         this.tileGrid = new Tile[gridSize][gridSize];
         this.gridSize = gridSize;
+        this.noOfBombs = numberOfBombs;
 
         for(int row=0; row<gridSize; row++) {
             for(int col=0; col<gridSize; col++) {
@@ -125,6 +129,18 @@ public class Grid {
         }
 
         return true;
+    }
+
+    public int getNoOfBombs() {
+        return noOfBombs;
+    }
+
+    public void setNoOfBombs(int noOfBombs) {
+        this.noOfBombs = noOfBombs;
+    }
+
+    public int getGridSize() {
+        return gridSize;
     }
 
     public String toString() {

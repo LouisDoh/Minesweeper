@@ -1,3 +1,5 @@
+package oop.blueprints;
+
 import java.util.Scanner;
 
 public class Main {
@@ -50,6 +52,7 @@ public class Main {
                 }
             }
 
+            System.out.println("Final grid:\n"+gameGrid);
             if(win) {
                 System.out.println("Congrats! You won!");
             } else {

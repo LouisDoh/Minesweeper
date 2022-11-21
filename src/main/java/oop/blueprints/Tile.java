@@ -1,3 +1,5 @@
+package oop.blueprints;
+
 public class Tile {
     private int nearBombs;
     private boolean isBomb;
