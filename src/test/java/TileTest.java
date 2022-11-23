@@ -9,6 +9,7 @@ public class TileTest {
         Tile testTile = new Tile();
         Assertions.assertEquals(false, testTile.isRevealed(), "Test tile incorrectly generated" +
                 " as revealed");
+        Assertions.assertEquals(0,testTile.getNearBombs(), "Test tile doesn't have 0 near bombs.");
     }
 
     @Test

@@ -13,7 +13,7 @@ public class GridTest {
         String twoGridString = "+--+\n|oo|\n|oo|\n+--+";
 
         Assertions.assertEquals(5,tenGrid.getNoOfBombs(),"Grid has incorrect number of bombs.");
-        Assertions.assertEquals(10,tenGrid.getGridSize(),"Ten grid size is incorrect");
+        Assertions.assertEquals(10,tenGrid.getGridSize(),"Ten grid size is incorrect.");
         Assertions.assertEquals(0,zeroGrid.getGridSize(),"Zero grid size is incorrect.");
 
         tenGrid.checkWin();
