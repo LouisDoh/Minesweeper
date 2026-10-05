@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         launchGame();
     }
-
+    //hehe
     public static void launchGame() {
         Scanner in = new Scanner(System.in);
         Grid gameGrid;
